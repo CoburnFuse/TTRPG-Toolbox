@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Initiative Tracker</title>
+    <link href="style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <table id="combatTracker">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Health</th>
+                <th>Initiative</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody id="combatants">
+
+        </tbody>
+    </table>
+    <button>Next in turn!</button>
+    <br><br>
+    <div>
+        <!--New creature-->
+        ADD NEW
+        <br>
+        <form action="/post" method="post" onsubmit="addNewOnField()" id="addNew">
+            Name <input type="text" id="inputName" name="name"><br>
+            HP <input type="number" pattern="[0-9]" id="inputHP" name="HP"><br>
+            Initiative <input type="number" pattern="[0-9]" id="inputInitiative" name="initiative"><br>
+            Is player? <input type="checkbox" id="inputPlayerBool" name="player"><br>
+
+            <input type="submit" value="Submit">
+        </form>
+
+        <!--New creature-->
+    </div> <br><br>
+    <button onclick="emptyTracker();">Clear list</button>
+</body>
+<script src="scripts/scripts.js"></script>
+
+</html>
