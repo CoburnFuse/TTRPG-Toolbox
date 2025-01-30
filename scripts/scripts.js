@@ -22,9 +22,9 @@ function updateTable(){
     for (var i = 0; i < onField.length; i++){
         tbodyRef.insertRow().innerHTML =
         "<td>" + ((onField[i].currentTurn) ? '►':'') + onField[i].name + "</td>" +
-        "<td><input type='number' value = '" + onField[i].health + "'></td>" +
+        "<td>" + ((onField[i].isPlayer) ? '' : '<input type="number" value = ' + onField[i].health + '>') + "</td>" +
         "<td>" + onField[i].initiative + "</td>" +
-        "<td> <button>Kill</button></td>";
+        "<td> <button onclick='removeSingleFromTracker(" + i + ");'>Kill</button></td>";
     }
 }
 
@@ -49,8 +49,9 @@ function emptyTable(){
     document.getElementById('combatants').innerHTML = '';
 }
 
-function removeSingleFromTracker(){
-
+function removeSingleFromTracker(id){
+    onField.splice(id, 1);
+    updateTable();
 }
 
 function nextInTurn(){

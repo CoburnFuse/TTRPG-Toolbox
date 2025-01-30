@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>Initiative Tracker</title>
     <link href="style.css" rel="stylesheet" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 </head>
 
 <body>
@@ -28,9 +29,9 @@
         ADD NEW
         <br>
         <form action="/post" method="post" onsubmit="addNewOnField()" id="addNew">
-            Name <input type="text" id="inputName" name="name"><br>
+            Name <input type="text" id="inputName" name="name" required><br>
             HP <input type="number" pattern="[0-9]" id="inputHP" name="HP"><br>
-            Initiative <input type="number" pattern="[0-9]" id="inputInitiative" name="initiative"><br>
+            Initiative <input type="number" pattern="[0-9]" id="inputInitiative" name="initiative" required><br>
             Is player? <input type="checkbox" id="inputPlayerBool" name="player"><br>
 
             <input type="submit" value="Submit">
