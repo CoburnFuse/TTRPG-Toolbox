@@ -44,9 +44,17 @@ function sortByInitiative() {
 }
 
 function updateHP(id) {
-    var newHealth = document.getElementById("hp_" + id).value;
-    onField[id].health = parseInt(newHealth);
-    saveToStorage();
+    var inputHealth = document.getElementById("hp_" + id).value;
+    var currentHealth = onField[id].health;
+    var newHealth = parseInt(inputHealth);
+
+    //Checks if its actually a valid number
+    if(!isNaN(newHealth) && Number.isInteger(newHealth)) {
+        onField[id].health = parseInt(newHealth);
+        saveToStorage();
+    } else {
+        document.getElementById("hp_" + id).value = currentHealth;
+    }
 }
 
 function emptyTracker() {
