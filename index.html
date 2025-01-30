@@ -29,14 +29,17 @@
         <br>
         <form action="/post" method="post" onsubmit="addNewOnField()" id="addNew">
             Name <input type="text" id="inputName" name="name" required><br>
-            HP <input type="number" pattern="[0-9]" id="inputHP" name="HP"><br>
-            Initiative <input type="number" pattern="[0-9]" id="inputInitiative" name="initiative" required><br>
+            HP* <input type="number" id="inputHP" name="HP"><br>
+            Initiative** <input type="number" id="inputInitiative" name="initiative" step="0.1" required><br>
             Is player? <input type="checkbox" id="inputPlayerBool" name="player"><br>
 
             <input type="submit" value="Add to tracker">
         </form>
         <!--New creature-->
     </div>
+    <br>
+    *If the combatant is a player, HP doesn't have to be entered.<br>
+    **If there are shared initiatives, you can use a single number after the decimal, allowing for 10 combatants per initiative.
 </body>
 <script src="scripts/scripts.js"></script>
 
