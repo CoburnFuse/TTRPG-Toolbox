@@ -4,7 +4,7 @@ var combatantInitiative;
 
 function addNewOnField(event){
     event.preventDefault();
-    
+
     combatantInitiative = parseFloat(inputInitiative.value).toFixed(1);
     // Get all variables
     if (onField.some(onField => onField.initiative === combatantInitiative) === false ){
@@ -87,13 +87,16 @@ function saveToStorage(){
 }
 
 function loadStorage(){
-    onField = JSON.parse(localStorage.currentCombatants);
-    darkThemeOn = JSON.parse(localStorage.currentTheme);
-
-    if(darkThemeOn === true){
-        document.body.classList.add("dark");
+    if (localStorage.getItem("currentCombatants") != null){
+        onField = JSON.parse(localStorage.currentCombatants);
     }
-
+    
+    if (localStorage.getItem("currentTheme") != null){
+        darkThemeOn = JSON.parse(localStorage.currentTheme);
+        if(darkThemeOn === true){
+            document.body.classList.add("dark");
+        }
+    }   
     updateTable();
 }
 
