@@ -71,13 +71,6 @@ function saveToStorage(){
     
 }
 
-function startCombat(){
-    // Sets the currentTurn to the first in the list
-    clearCurrentTurn();
-    onField[0].currentTurn = true;
-    updateTable();
-}
-
 function clearCurrentTurn(){
     for (var j = 0; j < onField.length; j++){
         onField[j].currentTurn = false;
