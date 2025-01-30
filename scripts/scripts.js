@@ -24,7 +24,8 @@ function updateTable() {
     sortByInitiative();
     saveToStorage();
     checkForCombat();
-
+    resetForm()
+    
     // Get the tbody of the table and write to table
     var tbodyRef = document.getElementById('combatTracker').getElementsByTagName('tbody')[0];
     for (var i = 0; i < onField.length; i++) {
@@ -66,7 +67,7 @@ function removeSingleFromTracker(id) {
     updateTable();
 }
 
-function nextInTurn() {
+function nextTurn() {
     if (onField.length !== 0) {
         var getCurrentTurn = onField.findIndex(onField => onField.currentTurn === true);
 
@@ -113,8 +114,17 @@ function switchTheme() {
 
 function checkForCombat() {
     if (onField.find(item => item.currentTurn === true)) {
-        document.getElementById("turnButton").textContent = "Next in turn!";
+        document.getElementById("turnButton").textContent = "Next turn!";
     } else {
         document.getElementById("turnButton").textContent = "Start combat!";
     }
+}
+
+function toggleHPinput(){
+    ((inputPlayerBool.checked === true) ? document.getElementById('inputHP').disabled = true : document.getElementById('inputHP').disabled = false);
+}
+
+function resetForm(){
+    document.getElementById("addNew").reset();
+    document.getElementById('inputHP').disabled = false;
 }

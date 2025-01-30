@@ -9,7 +9,7 @@
 </head>
 
 <body onload="loadStorage();">
-    <button onclick="nextInTurn();" id="turnButton">Start combat!</button> 
+    <button onclick="nextTurn();" id="turnButton">Start combat!</button> 
     <button onclick="emptyTracker();">Clear tracker</button> 
     <button onclick="switchTheme();">Switch theme</button>
     <table id="combatTracker">
@@ -31,9 +31,9 @@
         <form onsubmit="addNewOnField(event)" id="addNew">
             <b><u>Add new combatant</u></b>
             <div class="addNewTableRow"><label for="inputName">Name: </label><input type="text" id="inputName" name="name" required><br></div>
-            <div class="addNewTableRow"><label for="inputHP">Health*: </label><input type="number" id="inputHP" name="HP"><br></div>
+            <div class="addNewTableRow"><label for="inputHP">Health*: </label><input type="number" id="inputHP" name="HP" required><br></div>
             <div class="addNewTableRow"><label for="inputInitiative">Initiative**: </label><input type="number" id="inputInitiative" name="initiative" step="0.1" required><br></div>
-            <div class="addNewTableRow"><label for="inputPlayerBool">Is a player? </label><input type="checkbox" id="inputPlayerBool" name="player"><br></div>
+            <div class="addNewTableRow"><label for="inputPlayerBool">Is a player? </label><input type="checkbox" id="inputPlayerBool" name="player" onchange="toggleHPinput()"><br></div>
             <div class="addNewTableRow"><input type="submit" value="Add to tracker"></div>
         </form>
         <!--New creature-->
