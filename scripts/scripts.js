@@ -1,5 +1,7 @@
 var onField = [];
 
+
+
 function addNewOnField(){
 
     // Get all variables
@@ -14,13 +16,14 @@ function updateTable(){
     // Empty the table to rewrite
     emptyTable();
     sortByInitiative();
+    saveToStorage();
 
     // Get the tbody of the table and write to table
     var tbodyRef = document.getElementById('combatTracker').getElementsByTagName('tbody')[0];
     for (var i = 0; i < onField.length; i++){
         tbodyRef.insertRow().innerHTML =
         "<td>" + ((onField[i].currentTurn) ? '►':'') + onField[i].name + "</td>" +
-        "<td>" + ((onField[i].isPlayer) ? '' : '<input type="number" value = ' + onField[i].health + '>') + "</td>" +
+        "<td>" + ((onField[i].isPlayer) ? '' : '<input type="number" value = ' + onField[i].health + ' id="hp_' + i + '" onchange="updateHP(' + i + ')">') + "</td>" +
         "<td>" + onField[i].initiative + "</td>" +
         "<td> <button onclick='removeSingleFromTracker(" + i + ");'>Kill</button></td>";
     }
@@ -32,8 +35,13 @@ function sortByInitiative(){
     });
 }
 
-function updateHP(){
+function updateHP(id){
+    var newHealth = document.getElementById("hp_" + id).value;
+    onField[id].health = parseInt(newHealth);
 
+    console.table(onField);
+
+    saveToStorage();
 }
 
 function emptyTracker(){
@@ -68,5 +76,10 @@ function nextInTurn(){
 }
 
 function saveToStorage(){
-    
+    localStorage.currentCombatants = JSON.stringify(onField);
+}
+
+function loadStorage(){
+    onField = JSON.parse(localStorage.currentCombatants);
+    updateTable();
 }
