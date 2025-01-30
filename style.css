@@ -7,6 +7,10 @@ html{
     background-color:black;
 }
 
+.dark > a{
+    color:lightblue;
+}
+
 .addNewTableRow{
     display: table-row;
 }
@@ -27,4 +31,8 @@ label {
 .healthTable{
     max-width:100px;
     margin: 0 5px;
+}
+
+a{
+    color:darkcyan;
 }
