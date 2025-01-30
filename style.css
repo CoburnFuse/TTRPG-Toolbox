@@ -1,3 +1,30 @@
 html{
     font-family:"Trebuchet MS";
 }
+
+.dark{
+    color:white;
+    background-color:black;
+}
+
+.addNewTableRow{
+    display: table-row;
+}
+
+label, input {
+    display:table-cell;
+    margin-top: 5px;
+}
+
+label {
+    padding-right: 10px;;
+}
+
+#combatTracker th{
+    text-decoration: underline;
+}
+
+.healthTable{
+    max-width:100px;
+    margin: 0 5px;
+}

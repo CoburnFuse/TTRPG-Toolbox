@@ -1,6 +1,5 @@
 var onField = [];
-
-
+var darkThemeOn;
 
 function addNewOnField(){
 
@@ -23,7 +22,7 @@ function updateTable(){
     for (var i = 0; i < onField.length; i++){
         tbodyRef.insertRow().innerHTML =
         "<td>" + ((onField[i].currentTurn) ? '►':'') + onField[i].name + "</td>" +
-        "<td>" + ((onField[i].isPlayer) ? '' : '<input type="number" value = ' + onField[i].health + ' id="hp_' + i + '" onchange="updateHP(' + i + ')">') + "</td>" +
+        "<td>" + ((onField[i].isPlayer) ? '' : '<input class="healthTable" type="number" value = ' + onField[i].health + ' id="hp_' + i + '" onchange="updateHP(' + i + ')">') + "</td>" +
         "<td>" + onField[i].initiative + "</td>" +
         "<td> <button onclick='removeSingleFromTracker(" + i + ");'>Kill</button></td>";
     }
@@ -81,5 +80,23 @@ function saveToStorage(){
 
 function loadStorage(){
     onField = JSON.parse(localStorage.currentCombatants);
+    darkThemeOn = JSON.parse(localStorage.currentTheme);
+
+    if(darkThemeOn === true){
+        document.body.classList.add("dark");
+    }
+
     updateTable();
+}
+
+function switchTheme(){
+    if(darkThemeOn === true){
+        document.body.classList.remove("dark");
+        darkThemeOn = false;
+    }else{
+        document.body.classList.add("dark");
+        darkThemeOn = true;
+    }
+
+    localStorage.currentTheme = JSON.stringify(darkThemeOn);
 }
