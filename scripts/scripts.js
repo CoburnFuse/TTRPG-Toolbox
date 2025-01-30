@@ -1,14 +1,20 @@
 var onField = [];
 var darkThemeOn;
+var combatantInitiative;
 
 function addNewOnField(){
 
+    combatantInitiative = parseFloat(inputInitiative.value).toFixed(1);
     // Get all variables
-    onField.push({name: inputName.value, health: inputHP.value, initiative: inputInitiative.value, isPlayer: inputPlayerBool.checked, currentTurn: false});
+    if (onField.some(onField => onField.initiative === combatantInitiative) === false ){
+        onField.push({name: inputName.value, health: inputHP.value, initiative: combatantInitiative, isPlayer: inputPlayerBool.checked, currentTurn: false});
 
-    // Clear form
-    updateTable();
-    addNew.reset();
+        // Clear form
+        addNew.reset();
+        updateTable();
+    } else {
+        alert("A combatant already has this initiative.");
+    }
 }
 
 function updateTable(){
@@ -16,6 +22,7 @@ function updateTable(){
     emptyTable();
     sortByInitiative();
     saveToStorage();
+    checkForCombat();
 
     // Get the tbody of the table and write to table
     var tbodyRef = document.getElementById('combatTracker').getElementsByTagName('tbody')[0];
@@ -99,4 +106,12 @@ function switchTheme(){
     }
 
     localStorage.currentTheme = JSON.stringify(darkThemeOn);
+}
+
+function checkForCombat(){
+    if(onField.find(item => item.currentTurn === true)) {
+        document.getElementById("turnButton").textContent = "Next in turn!";
+    }else{
+        document.getElementById("turnButton").textContent = "Start combat!";
+    }
 }

@@ -9,7 +9,7 @@
 </head>
 
 <body onload="loadStorage();">
-    <button onclick="nextInTurn();">Next in turn!</button> 
+    <button onclick="nextInTurn();" id="turnButton">Start combat!</button> 
     <button onclick="emptyTracker();">Clear tracker</button> 
     <button onclick="switchTheme();">Switch theme</button>
     <table id="combatTracker">
@@ -41,6 +41,7 @@
     <br>
     *If the combatant is a player, HP doesn't have to be entered.<br>
     **If there are shared initiatives, you can use a single number after the decimal, allowing for 10 combatants per initiative.
+    Use .0 for the lowest combatant with the shared initiative.
 </body>
 <script src="scripts/scripts.js"></script>
 
