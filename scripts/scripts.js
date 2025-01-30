@@ -5,8 +5,6 @@ function addNewOnField(){
     // Get all variables
     onField.push({name: inputName.value, health: inputHP.value, initiative: inputInitiative.value, isPlayer: inputPlayerBool.checked, currentTurn: false});
 
-    console.table(onField);
-
     // Clear form
     updateTable();
     addNew.reset();
@@ -17,7 +15,7 @@ function updateTable(){
     emptyTable();
     sortByInitiative();
 
-    // Get the tbody of the table
+    // Get the tbody of the table and write to table
     var tbodyRef = document.getElementById('combatTracker').getElementsByTagName('tbody')[0];
     for (var i = 0; i < onField.length; i++){
         tbodyRef.insertRow().innerHTML =
@@ -40,9 +38,11 @@ function updateHP(){
 
 function emptyTracker(){
     // Empty the array
-    onField.length = 0;
-
-    updateTable();
+    let text = "Are you sure you want to clear the tracker?";
+    if (confirm(text) === true){
+        onField.length = 0;
+        updateTable();
+    }
 }
 
 function emptyTable(){
@@ -69,10 +69,4 @@ function nextInTurn(){
 
 function saveToStorage(){
     
-}
-
-function clearCurrentTurn(){
-    for (var j = 0; j < onField.length; j++){
-        onField[j].currentTurn = false;
-    }
 }

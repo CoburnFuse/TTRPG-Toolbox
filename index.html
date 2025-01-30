@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    <button onclick="nextInTurn();">Next in turn!</button> <button onclick="emptyTracker();">Clear tracker</button>
     <table id="combatTracker">
         <thead>
             <tr>
@@ -18,15 +19,13 @@
                 <th>Options</th>
             </tr>
         </thead>
-        <tbody id="combatants">
-
+        <tbody id="combatants"><!--will be dispatched-->
         </tbody>
     </table>
-    <button onclick="nextInTurn();">Next in turn!</button>
     <br><br>
     <div>
         <!--New creature-->
-        ADD NEW
+        <b>ADD NEW</b>
         <br>
         <form action="/post" method="post" onsubmit="addNewOnField()" id="addNew">
             Name <input type="text" id="inputName" name="name" required><br>
@@ -34,12 +33,10 @@
             Initiative <input type="number" pattern="[0-9]" id="inputInitiative" name="initiative" required><br>
             Is player? <input type="checkbox" id="inputPlayerBool" name="player"><br>
 
-            <input type="submit" value="Submit">
+            <input type="submit" value="Add to tracker">
         </form>
-
         <!--New creature-->
-    </div> <br><br>
-    <button onclick="emptyTracker();">Clear list</button>
+    </div>
 </body>
 <script src="scripts/scripts.js"></script>
 
