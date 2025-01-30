@@ -45,9 +45,6 @@ function sortByInitiative() {
 function updateHP(id) {
     var newHealth = document.getElementById("hp_" + id).value;
     onField[id].health = parseInt(newHealth);
-
-    console.table(onField);
-
     saveToStorage();
 }
 
