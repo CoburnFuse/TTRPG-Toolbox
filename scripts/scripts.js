@@ -2,8 +2,9 @@ var onField = [];
 var darkThemeOn;
 var combatantInitiative;
 
-function addNewOnField(){
-
+function addNewOnField(event){
+    event.preventDefault();
+    
     combatantInitiative = parseFloat(inputInitiative.value).toFixed(1);
     // Get all variables
     if (onField.some(onField => onField.initiative === combatantInitiative) === false ){
