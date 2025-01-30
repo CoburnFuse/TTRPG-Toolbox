@@ -3,7 +3,7 @@ var onField = [];
 function addNewOnField(){
 
     // Get all variables
-    onField.push({name: inputName.value, health: inputHP.value, initiative: inputInitiative.value, isPlayer: inputPlayerBool.checked});
+    onField.push({name: inputName.value, health: inputHP.value, initiative: inputInitiative.value, isPlayer: inputPlayerBool.checked, currentTurn: false});
 
     console.table(onField);
 
@@ -21,7 +21,7 @@ function updateTable(){
     var tbodyRef = document.getElementById('combatTracker').getElementsByTagName('tbody')[0];
     for (var i = 0; i < onField.length; i++){
         tbodyRef.insertRow().innerHTML =
-        "<td>" + onField[i].name + "</td>" +
+        "<td>" + ((onField[i].currentTurn) ? '►':'') + onField[i].name + "</td>" +
         "<td><input type='number' value = '" + onField[i].health + "'></td>" +
         "<td>" + onField[i].initiative + "</td>" +
         "<td> <button>Kill</button></td>";
@@ -54,5 +54,31 @@ function removeSingleFromTracker(){
 }
 
 function nextInTurn(){
+    var getCurrentTurn = onField.findIndex(onField => onField.currentTurn === true);
+
+    if (getCurrentTurn !== -1) {
+        onField[getCurrentTurn].currentTurn = false;
+    }
+
+    var getNextTurn = (getCurrentTurn + 1) % onField.length;
+    onField[getNextTurn].currentTurn = true;
+
+    updateTable();
+}
+
+function saveToStorage(){
     
+}
+
+function startCombat(){
+    // Sets the currentTurn to the first in the list
+    clearCurrentTurn();
+    onField[0].currentTurn = true;
+    updateTable();
+}
+
+function clearCurrentTurn(){
+    for (var j = 0; j < onField.length; j++){
+        onField[j].currentTurn = false;
+    }
 }
