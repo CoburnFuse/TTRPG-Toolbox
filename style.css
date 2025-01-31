@@ -3,12 +3,12 @@ html{
 }
 
 body{
-    background-color:ghostwhite;
+    background-color:#f8f8ff;
 }
 
 .dark{
-    color:white;
-    background-color:black;
+    color:#d3d3d3;
+    background-color:#343434;
 }
 
 .dark > a{
