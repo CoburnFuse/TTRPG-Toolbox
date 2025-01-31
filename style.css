@@ -2,6 +2,10 @@ html{
     font-family:"Trebuchet MS";
 }
 
+body{
+    background-color:ghostwhite;
+}
+
 .dark{
     color:white;
     background-color:black;
