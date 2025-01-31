@@ -71,6 +71,9 @@ function emptyTable() {
 }
 
 function removeSingleFromTracker(id) {
+    if (onField[id].currentTurn === true){
+        nextTurn();
+    }
     onField.splice(id, 1);
     updateTable();
 }
@@ -129,7 +132,11 @@ function checkForCombat() {
 }
 
 function toggleHPinput(){
-    ((inputPlayerBool.checked === true) ? document.getElementById('inputHP').disabled = true : document.getElementById('inputHP').disabled = false);
+    if (inputPlayerBool.checked === true){
+        document.getElementById('inputHP').disabled = true;
+    } else {
+        document.getElementById('inputHP').disabled = false;
+    }
 }
 
 function resetForm(){
