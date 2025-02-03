@@ -1,21 +1,24 @@
 var onField = [];
 var darkThemeOn;
 var combatantInitiative;
+var sharedInitiativeDropdown = document.getElementById('inputPriorityDropdown');
 
 function addNewOnField(event) {
     event.preventDefault();
-
-    combatantInitiative = parseFloat(inputInitiative.value).toFixed(1);
+    combatantInitiative = parseInt(inputInitiative.value, 10);
+    var priorityIndex = parseInt(inputPriorityDropdown.value, 10)
     // Get all variables
-    if (onField.some(onField => onField.initiative === combatantInitiative) === false) {
-        onField.push({ name: inputName.value, health: inputHP.value, initiative: combatantInitiative, isPlayer: inputPlayerBool.checked, currentTurn: false });
 
-        // Clear form
-        addNew.reset();
-        updateTable();
-    } else {
-        alert("A combatant already has this initiative.");
+    var toPush = ({ name: inputName.value, health: inputHP.value, initiative: combatantInitiative, isPlayer: inputPlayerBool.checked, currentTurn: false });
+    if(priorityIndex !== "first" && !isNaN(priorityIndex)){
+        onField.splice(priorityIndex + 1, 0, toPush);
+    }else{
+        onField.unshift(toPush);
     }
+
+    // Clear form
+    addNew.reset();
+    updateTable();
 }
 
 function updateTable() {
@@ -25,7 +28,7 @@ function updateTable() {
     saveToStorage();
     checkForCombat();
     resetForm()
-    
+
     // Get the tbody of the table and write to table
     var tbodyRef = document.getElementById('combatTracker').getElementsByTagName('tbody')[0];
     for (var i = 0; i < onField.length; i++) {
@@ -49,7 +52,7 @@ function updateHP(id) {
     var newHealth = parseInt(inputHealth);
 
     //Checks if its actually a valid number
-    if(!isNaN(newHealth) && Number.isInteger(newHealth)) {
+    if (!isNaN(newHealth) && Number.isInteger(newHealth)) {
         onField[id].health = parseInt(newHealth);
         saveToStorage();
     } else {
@@ -71,7 +74,7 @@ function emptyTable() {
 }
 
 function removeSingleFromTracker(id) {
-    if (onField[id].currentTurn === true){
+    if (onField[id].currentTurn === true) {
         nextTurn();
     }
     onField.splice(id, 1);
@@ -131,15 +134,42 @@ function checkForCombat() {
     }
 }
 
-function toggleHPinput(){
-    if (inputPlayerBool.checked === true){
+function toggleHPinput() {
+    if (inputPlayerBool.checked === true) {
         document.getElementById('inputHP').disabled = true;
     } else {
         document.getElementById('inputHP').disabled = false;
     }
 }
 
-function resetForm(){
+function resetForm() {
     document.getElementById("addNew").reset();
     document.getElementById('inputHP').disabled = false;
+    clearPriorityDropdown();
+}
+
+function checkForDuplicateInitiative() {
+    clearPriorityDropdown();
+
+    combatantInitiative = parseInt(inputInitiative.value, 10);
+
+    if (onField.some(item => item.initiative === combatantInitiative)) {
+        var sharedInitiatives = onField.filter(item => item.initiative === combatantInitiative);
+        sharedInitiatives.forEach(item => {
+            var option = document.createElement('option');
+            option.value = onField.indexOf(item);
+            option.textContent = "After " + item.name;
+            sharedInitiativeDropdown.appendChild(option);
+        })
+
+    } 
+}
+
+function clearPriorityDropdown(){
+    sharedInitiativeDropdown.innerHTML = '';
+
+    var firstOption = document.createElement('option');
+    firstOption.value = 'first';
+    firstOption.textContent = 'First';
+    sharedInitiativeDropdown.appendChild(firstOption);
 }
