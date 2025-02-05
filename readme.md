@@ -1,0 +1,2 @@
+This initiative tracker for TTRPGs (mainly for Dungeon and Dragons) was made because my DM wanted a 'no frills' initiative tracker. So here it is, the initiative tracker I made.
+It can be found online [right here](https://combattrack.mistralton.net/)!
