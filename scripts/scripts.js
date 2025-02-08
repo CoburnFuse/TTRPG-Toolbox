@@ -33,8 +33,8 @@ function updateTable() {
     var tbodyRef = document.getElementById('combatTracker').getElementsByTagName('tbody')[0];
     for (var i = 0; i < onField.length; i++) {
         tbodyRef.insertRow().innerHTML =
-            "<td>" + ((onField[i].currentTurn) ? '►' : '') + onField[i].name + "</td>" +
-            "<td>" + ((onField[i].isPlayer) ? '' : '<input class="healthTable" type="number" value = ' + onField[i].health + ' id="hp_' + i + '" onchange="updateHP(' + i + ')">') + "</td>" +
+            "<td" + ((onField[i].currentTurn) ? ' class="currentTurn">' : '>') + onField[i].name + "</td>" +
+            "<td>" + ((onField[i].isPlayer) ? '-' : '<input class="healthTable" type="number" value = ' + onField[i].health + ' id="hp_' + i + '" onchange="updateHP(' + i + ')">') + "</td>" +
             "<td>" + onField[i].initiative + "</td>" +
             "<td> <button onclick='removeSingleFromTracker(" + i + ");'>Kill</button></td>";
     }

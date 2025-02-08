@@ -1,42 +1,99 @@
-html{
-    font-family:"Trebuchet MS";
+html {
+    font-family: "Trebuchet MS";
 }
 
-body{
-    background-color:#f8f8ff;
+body {
+    background-color: #f8f8ff;
 }
 
-.dark{
-    color:#d3d3d3;
-    background-color:#343434;
+a {
+    color: darkcyan;
 }
 
-.dark > a{
-    color:lightblue;
+#container {
+    display: flex;
 }
 
-.addNewTableRow{
+#container div {
+    margin: 5px;
+}
+
+#combatantList {
+    max-width: 60%;
+}
+
+/* Form stuff */
+#addNew div{
     display: table-row;
 }
 
-label, input {
-    display:table-cell;
-    margin-top: 5px;
+#addNew label{
+    display: table-cell;
+    padding: 3px 15px 3px 0px;
 }
+/**/
 
-label {
-    padding-right: 10px;;
-}
-
-#combatTracker th{
+/*Table stuff*/
+#combatTracker th {
     text-decoration: underline;
 }
 
-.healthTable{
-    max-width:100px;
+.healthTable {
     margin: 0 5px;
+    max-width: 80%;
 }
 
-a{
-    color:darkcyan;
+#combatTracker {
+    width: 100%;
+    table-layout: fixed;
+}
+
+#combatants td:first-child,
+th:first-child {
+    width: 50%;
+}
+
+#combatants td {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: auto;
+    border-bottom: #d3d3d3 1px solid;
+}
+
+.currentTurn {
+    font-weight: bold;
+}
+
+.currentTurn:before {
+    content: "►";
+}
+/**/
+
+/*Dark mode*/
+.dark {
+    color: #d3d3d3;
+    background-color: #343434;
+}
+
+.dark a {
+    color: lightblue;
+}
+
+.dark #combatants td{
+    border-bottom: #454545 1px solid;
+}
+/**/
+
+@media only screen and (max-width: 900px) {
+    #container {
+        display: block;
+    }
+
+    #container div {
+        width: 100%;
+    }
+
+    #combatantList {
+        max-width: 100%;
+    }
 }
