@@ -51,6 +51,7 @@ a {
 #combatants td:first-child,
 th:first-child {
     width: 50%;
+    text-overflow: ellipsis;
 }
 
 #combatants td {
