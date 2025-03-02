@@ -6,10 +6,11 @@ var sharedInitiativeDropdown = document.getElementById('inputPriorityDropdown');
 function addNewOnField(event) {
     event.preventDefault();
     combatantInitiative = parseInt(inputInitiative.value, 10);
+    combatantAC = parseInt(inputAC.value, 10);
     var priorityIndex = parseInt(inputPriorityDropdown.value, 10)
     // Get all variables
 
-    var toPush = ({ name: inputName.value, health: inputHP.value, initiative: combatantInitiative, isPlayer: inputPlayerBool.checked, currentTurn: false });
+    var toPush = ({ name: inputName.value, health: inputHP.value, initiative: combatantInitiative, armorClass: combatantAC, isPlayer: inputPlayerBool.checked, currentTurn: false });
     if(priorityIndex !== "first" && !isNaN(priorityIndex)){
         onField.splice(priorityIndex + 1, 0, toPush);
     }else{
@@ -33,10 +34,11 @@ function updateTable() {
     var tbodyRef = document.getElementById('combatTracker').getElementsByTagName('tbody')[0];
     for (var i = 0; i < onField.length; i++) {
         tbodyRef.insertRow().innerHTML =
-            "<td" + ((onField[i].currentTurn) ? ' class="currentTurn">' : '>') + onField[i].name + "</td>" +
+            "<td " + ((onField[i].currentTurn) ? ' class="currentTurn">' : '>') + onField[i].name + "</td>" +
             "<td>" + ((onField[i].isPlayer) ? '-' : '<input class="healthTable" type="number" value = ' + onField[i].health + ' id="hp_' + i + '" onchange="updateHP(' + i + ')">') + "</td>" +
             "<td>" + onField[i].initiative + "</td>" +
-            "<td> <button onclick='removeSingleFromTracker(" + i + ");'>Kill</button></td>";
+            "<td>" + ((onField[i].isPlayer) ? '-' : onField[i].armorClass) + "</td>" +
+            "<td> <button onclick='removeSingleFromTracker(" + i + ");'>Kill</button><button onclick='renameCombatant(" + i + ");'>Rename</button></td>";
     }
 }
 
@@ -137,14 +139,17 @@ function checkForCombat() {
 function toggleHPinput() {
     if (inputPlayerBool.checked === true) {
         document.getElementById('inputHP').disabled = true;
+        document.getElementById('inputAC').disabled = true;
     } else {
         document.getElementById('inputHP').disabled = false;
+        document.getElementById('inputAC').disabled = false;
     }
 }
 
 function resetForm() {
     document.getElementById("addNew").reset();
     document.getElementById('inputHP').disabled = false;
+    document.getElementById('inputAC').disabled = false;
     clearPriorityDropdown();
 }
 
@@ -172,4 +177,12 @@ function clearPriorityDropdown(){
     firstOption.value = 'first';
     firstOption.textContent = 'First';
     sharedInitiativeDropdown.appendChild(firstOption);
+}
+
+function renameCombatant(id){
+    var toBeRenamed = prompt("Enter new name.");
+    if (toBeRenamed) {
+        onField[id].name = toBeRenamed;
+        updateTable();
+    }
 }

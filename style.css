@@ -44,7 +44,7 @@ a {
 }
 
 #combatTracker {
-    width: 100%;
+    width: 90%;
     table-layout: fixed;
 }
 
@@ -54,7 +54,6 @@ th:first-child {
 }
 
 #combatants td {
-    text-overflow: ellipsis;
     white-space: nowrap;
     overflow: auto;
     border-bottom: #d3d3d3 1px solid;

@@ -19,7 +19,8 @@
                     <tr>
                         <th>Name</th>
                         <th>Health</th>
-                        <th>Initiative</th>
+                        <th>Turn</th>
+                        <th>AC</th>
                         <th>Options</th>
                     </tr>
                 </thead>
@@ -34,6 +35,7 @@
                 <div><label for="inputName">Name: </label><input type="text" id="inputName" name="name" maxlength="40"><br></div>
                 <div><label for="inputHP">Health*: </label><input type="number" id="inputHP" name="HP" required><br></div>
                 <div><label for="inputInitiative">Initiative**: </label><input type="number" id="inputInitiative" name="initiative" onchange="checkForDuplicateInitiative()" required><br></div>
+                <div><label for="inputAC">AC: </label><input type="number" id="inputAC" name="AC" required><br></div>
                 <div><label for="inputPriorityDropdown">Priority**:</label><select id="inputPriorityDropdown" required></select></div>
                 <div><label for="inputPlayerBool">Is a player? </label><input type="checkbox" id="inputPlayerBool" name="player" onchange="toggleHPinput()"><br></div>
                 <div><input type="submit" value="Add to tracker"></div>
