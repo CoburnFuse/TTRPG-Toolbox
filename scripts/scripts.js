@@ -180,7 +180,7 @@ function clearPriorityDropdown(){
 }
 
 function renameCombatant(id){
-    var toBeRenamed = prompt("Enter new name.");
+    var toBeRenamed = prompt("Enter new name.", onField[id].name);
     if (toBeRenamed) {
         onField[id].name = toBeRenamed;
         updateTable();
