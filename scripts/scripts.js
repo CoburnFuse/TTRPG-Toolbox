@@ -144,13 +144,8 @@ function checkForCombat() {
 }
 
 function toggleHPinput() {
-    if (inputPlayerBool.checked === true) {
-        document.getElementById('inputHP').disabled = true;
-        document.getElementById('inputAC').disabled = true;
-    } else {
-        document.getElementById('inputHP').disabled = false;
-        document.getElementById('inputAC').disabled = false;
-    }
+    document.getElementById('inputHP').disabled = inputPlayerBool.checked;
+    document.getElementById('inputAC').disabled = inputPlayerBool.checked;
 }
 
 function resetForm() {
