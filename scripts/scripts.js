@@ -50,7 +50,6 @@ function sortByInitiative() {
 
 function enterPressEvent(event, id){
     if (event.key === 'Enter'){
-        event.preventDefault();
         updateHP(id);
     }
 }
@@ -130,13 +129,8 @@ function loadStorage() {
 }
 
 function switchTheme() {
-    if (darkThemeOn === true) {
-        document.body.classList.remove("dark");
-        darkThemeOn = false;
-    } else {
-        document.body.classList.add("dark");
-        darkThemeOn = true;
-    }
+    document.body.classList.toggle("dark");
+    darkThemeOn = !darkThemeOn;
 
     localStorage.currentTheme = JSON.stringify(darkThemeOn);
 }
