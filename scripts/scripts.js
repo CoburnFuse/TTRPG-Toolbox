@@ -5,12 +5,12 @@ var sharedInitiativeDropdown = document.getElementById('inputPriorityDropdown');
 
 function addNewOnField(event) {
     event.preventDefault();
+    combatantHP = parseInt(inputHP.value, 10);
     combatantInitiative = parseInt(inputInitiative.value, 10);
-    combatantAC = parseInt(inputAC.value, 10);
     var priorityIndex = parseInt(inputPriorityDropdown.value, 10)
     // Get all variables
 
-    var toPush = ({ name: inputName.value, health: inputHP.value, initiative: combatantInitiative, armorClass: combatantAC, isPlayer: inputPlayerBool.checked, currentTurn: false });
+    var toPush = ({ name: inputName.value, health: combatantHP, initiative: combatantInitiative, armorClass: inputAC.value, isPlayer: inputPlayerBool.checked, currentTurn: false });
     if(priorityIndex !== "first" && !isNaN(priorityIndex)){
         onField.splice(priorityIndex + 1, 0, toPush);
     }else{
@@ -35,7 +35,7 @@ function updateTable() {
     for (var i = 0; i < onField.length; i++) {
         tbodyRef.insertRow().innerHTML =
             "<td " + ((onField[i].currentTurn) ? ' class="currentTurn">' : '>') + onField[i].name + "</td>" +
-            "<td>" + ((onField[i].isPlayer) ? '-' : '<input class="healthTable" type="number" value = ' + onField[i].health + ' id="hp_' + i + '" onchange="updateHP(' + i + ')">') + "</td>" +
+            "<td>" + ((onField[i].isPlayer) ? '-' : '<input class="healthTable" type="text" placeholder = ' + onField[i].health + ' id="hp_' + i + '" onblur="updateHP(' + i +')" onkeydown="enterPressEvent(event, ' + i + ')">') + "</td>" +
             "<td>" + onField[i].initiative + "</td>" +
             "<td>" + ((onField[i].isPlayer) ? '-' : onField[i].armorClass) + "</td>" +
             "<td> <button onclick='removeSingleFromTracker(" + i + ");'>Kill</button><button onclick='renameCombatant(" + i + ");'>Rename</button></td>";
@@ -48,18 +48,31 @@ function sortByInitiative() {
     });
 }
 
+function enterPressEvent(event, id){
+    if (event.key === 'Enter'){
+        event.preventDefault();
+        updateHP(id);
+    }
+}
+
 function updateHP(id) {
     var inputHealth = document.getElementById("hp_" + id).value;
     var currentHealth = onField[id].health;
-    var newHealth = parseInt(inputHealth);
+    var newHealth = currentHealth;
+    var regex = /^[+-]?\d+/;
 
-    //Checks if its actually a valid number
-    if (!isNaN(newHealth) && Number.isInteger(newHealth)) {
-        onField[id].health = parseInt(newHealth);
-        saveToStorage();
+    if (regex.test(inputHealth)) {
+        if (inputHealth.startsWith('+') || inputHealth.startsWith('-')) {
+            newHealth = currentHealth + parseInt(inputHealth);
+        } else {
+            newHealth = parseInt(inputHealth);
+        }
+        onField[id].health = newHealth;
+        document.getElementById("hp_" + id).placeholder = newHealth;
     } else {
-        document.getElementById("hp_" + id).value = currentHealth;
+        document.getElementById("hp_" + id).placeholder = currentHealth;
     }
+    updateTable();
 }
 
 function emptyTracker() {
