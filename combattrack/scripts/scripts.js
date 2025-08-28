@@ -33,7 +33,7 @@ function updateTable() {
             "<td " + ((onField[i].currentTurn) ? ' class="currentTurn">' : '>') + onField[i].name + "</td>" +
             "<td>" + ((onField[i].isPlayer) ? '-' : '<input class="healthTable" type="text" placeholder = ' + onField[i].health + ' id="hp_' + i + '" onblur="updateHP(' + i +')" onkeydown="enterPressEvent(event, ' + i + ')">') + "</td>" +
             "<td>" + onField[i].initiative + "</td>" +
-            "<td>" + ((onField[i].isPlayer) ? '-' : '<input class="healthTable" type="text" id="ac_' + i + '" value = "' + onField[i].armorClass + '" oninput="updateAC(' + i + ')">') + "</td>" +
+            "<td>" + ((onField[i].isPlayer) ? '-' : '<input class="healthTable" type="text" id="ac_' + i + '" value = "' + onField[i].armorClass + '" onblur="updateAC(' + i + ')">') + "</td>" +
             "<td> <button onclick='removeSingleFromTracker(" + i + ");'>Kill</button><button onclick='renameCombatant(" + i + ");'>Rename</button></td>";
     }
 }
