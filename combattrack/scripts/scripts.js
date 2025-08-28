@@ -8,7 +8,6 @@ function addNewOnField(event) {
     combatantHP = parseInt(inputHP.value, 10);
     combatantInitiative = parseInt(inputInitiative.value, 10);
     var priorityIndex = parseInt(inputPriorityDropdown.value, 10)
-    // Get all variables
 
     var toPush = ({ name: inputName.value, health: combatantHP, initiative: combatantInitiative, armorClass: inputAC.value, isPlayer: inputPlayerBool.checked, currentTurn: false });
     if(priorityIndex !== "first" && !isNaN(priorityIndex)){
@@ -17,27 +16,24 @@ function addNewOnField(event) {
         onField.unshift(toPush);
     }
 
-    // Clear form
     addNew.reset();
     updateTable();
 }
 
 function updateTable() {
-    // Empty the table to rewrite
     emptyTable();
     sortByInitiative();
     saveToStorage();
     checkForCombat();
     resetForm()
 
-    // Get the tbody of the table and write to table
     var tbodyRef = document.getElementById('combatTracker').getElementsByTagName('tbody')[0];
     for (var i = 0; i < onField.length; i++) {
         tbodyRef.insertRow().innerHTML =
             "<td " + ((onField[i].currentTurn) ? ' class="currentTurn">' : '>') + onField[i].name + "</td>" +
             "<td>" + ((onField[i].isPlayer) ? '-' : '<input class="healthTable" type="text" placeholder = ' + onField[i].health + ' id="hp_' + i + '" onblur="updateHP(' + i +')" onkeydown="enterPressEvent(event, ' + i + ')">') + "</td>" +
             "<td>" + onField[i].initiative + "</td>" +
-            "<td>" + ((onField[i].isPlayer) ? '-' : onField[i].armorClass) + "</td>" +
+            "<td>" + ((onField[i].isPlayer) ? '-' : '<input class="healthTable" type="text" id="ac_' + i + '" value = "' + onField[i].armorClass + '" oninput="updateAC(' + i + ')">') + "</td>" +
             "<td> <button onclick='removeSingleFromTracker(" + i + ");'>Kill</button><button onclick='renameCombatant(" + i + ");'>Rename</button></td>";
     }
 }
@@ -54,6 +50,12 @@ function enterPressEvent(event, id){
     }
 }
 
+function updateAC(id){
+    var inputAC = document.getElementById("ac_" + id).value;
+    onField[id].armorClass = inputAC;
+    updateTable();
+}
+
 function updateHP(id) {
     var inputHealth = document.getElementById("hp_" + id).value;
     var currentHealth = onField[id].health;
@@ -66,8 +68,13 @@ function updateHP(id) {
         } else {
             newHealth = parseInt(inputHealth);
         }
-        onField[id].health = newHealth;
-        document.getElementById("hp_" + id).placeholder = newHealth;
+
+        if (newHealth <= 0){
+            onField[id].health = 0;
+        }else{
+            onField[id].health = newHealth;
+            document.getElementById("hp_" + id).placeholder = newHealth;
+        }
     } else {
         document.getElementById("hp_" + id).placeholder = currentHealth;
     }
@@ -75,7 +82,6 @@ function updateHP(id) {
 }
 
 function emptyTracker() {
-    // Empty the array
     let text = "Are you sure you want to clear the tracker?";
     if (confirm(text) === true) {
         onField.length = 0;
