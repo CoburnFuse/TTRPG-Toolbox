@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>Initiative Tracker</title>
     <link href="style.css" rel="stylesheet" />
+    <link href="/styleGlobal.css" rel="stylesheet"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 </head>
 
@@ -13,7 +14,6 @@
         <div id="combatantList">
             <button onclick="nextTurn();" id="turnButton">Start combat!</button>
             <button onclick="emptyTracker();">Clear tracker</button>
-            <button onclick="switchTheme();">Switch theme</button>
             <table id="combatTracker">
                 <thead>
                     <tr>
@@ -44,7 +44,8 @@
             <br>
             *Can be left empty if the combatant is a player.<br>
             **If there are shared initiatives, use the priority dropdown to select after which combatant the new combatant goes.<br><br>
-            You can change the Health of combatants by using simple equations like '+10' and '-22', or by typing in the new health.
+            You can change the Health of combatants by using simple equations like '+10' and '-22', or by typing in the new health.<br><br>
+            [ <a href="/index.html">Return to toolbox</a> ]
         </div>
     </section>
 </body>

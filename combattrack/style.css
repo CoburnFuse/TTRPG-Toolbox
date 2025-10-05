@@ -1,15 +1,3 @@
-html {
-    font-family: "Trebuchet MS";
-}
-
-body {
-    background-color: #f8f8ff;
-}
-
-a {
-    color: darkcyan;
-}
-
 #container {
     display: flex;
 }
@@ -57,7 +45,6 @@ th:first-child {
 #combatants td {
     white-space: nowrap;
     overflow: auto;
-    border-bottom: #d3d3d3 1px solid;
 }
 
 .currentTurn {
@@ -67,22 +54,6 @@ th:first-child {
 .currentTurn:before {
     content: "►";
 }
-/**/
-
-/*Dark mode*/
-.dark {
-    color: #d3d3d3;
-    background-color: #343434;
-}
-
-.dark a {
-    color: lightblue;
-}
-
-.dark #combatants td{
-    border-bottom: #454545 1px solid;
-}
-/**/
 
 @media only screen and (max-width: 900px) {
     #container {
@@ -95,5 +66,17 @@ th:first-child {
 
     #combatantList {
         max-width: 100%;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    body #combatants td{
+        border-bottom: #454545 1px solid;
+    }
+}
+
+@media (prefers-color-scheme: light){
+    body #combatants td{
+        border-bottom: #d3d3d3 1px solid;
     }
 }

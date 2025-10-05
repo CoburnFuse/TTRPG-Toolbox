@@ -124,21 +124,7 @@ function loadStorage() {
     if (localStorage.getItem("currentCombatants") != null) {
         onField = JSON.parse(localStorage.currentCombatants);
     }
-
-    if (localStorage.getItem("currentTheme") != null) {
-        darkThemeOn = JSON.parse(localStorage.currentTheme);
-        if (darkThemeOn === true) {
-            document.body.classList.add("dark");
-        }
-    }
     updateTable();
-}
-
-function switchTheme() {
-    document.body.classList.toggle("dark");
-    darkThemeOn = !darkThemeOn;
-
-    localStorage.currentTheme = JSON.stringify(darkThemeOn);
 }
 
 function checkForCombat() {

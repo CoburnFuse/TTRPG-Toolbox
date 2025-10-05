@@ -1,0 +1,32 @@
+html {
+    font-family: "Trebuchet MS";
+}
+
+.containerCenter{
+    max-width:620px;
+    margin:auto;
+}
+
+.containerCenter h1{
+    text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        color: #d3d3d3;
+        background-color: #343434;
+    }
+    body a {
+        color: lightblue;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    body {
+        color: #000000;
+        background-color: #f8f8ff;
+    }
+    body a {
+        color: darkcyan;
+    }
+}
